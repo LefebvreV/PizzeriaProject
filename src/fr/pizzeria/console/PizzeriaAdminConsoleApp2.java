@@ -1,24 +1,14 @@
 package fr.pizzeria.console;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp2 {
-
-private static ArrayList<Pizza> listPizza; 
 	
 	public static void main(String[] args) {
-		listPizza = new ArrayList<Pizza>();
-		listPizza.add(new Pizza(0,"PEP","Pépéroni",12.50));
-		listPizza.add(new Pizza(1,"MAR","Margherita",14.00));
-		listPizza.add(new Pizza(2,"REIN","La reine",11.50));
-		listPizza.add(new Pizza(3,"FRO","La 4 formages",12.00));
-		listPizza.add(new Pizza(4,"CAN","La cannibale",12.50));
-		listPizza.add(new Pizza(5,"SAV","La savoyarde",13.00));
-		listPizza.add( new Pizza(6,"ORI","L'orientale",13.50));
-		listPizza.add( new Pizza(7,"IND","L'indienne",14.00));
+		
+		IPizzaDao pizza = new PizzaMemDao();
 		
 		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(afficherMenu());
@@ -29,9 +19,8 @@ private static ArrayList<Pizza> listPizza;
 			switch(choix){
 				case 1: 
 					System.out.println("Liste des pizzas");
-					for(int i=0; i<listPizza.size();i++)
-						System.out.println(listPizza.get(i).toString());
-				
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
 				break;
 				
 				case 2: 
@@ -46,14 +35,14 @@ private static ArrayList<Pizza> listPizza;
 					String prixTemp = choixUtilisateur.nextLine();
 					double prix = Double.parseDouble(prixTemp);
 					
-					listPizza.add(new Pizza(code,nom,prix));
+					pizza.saveNewPizza(new Pizza(code,nom,prix));
 				break;
 				
 				case 3: 
 					System.out.println("Mise à jour d'une pizza");
 					System.out.println("Liste des pizzas");
-					for(int i=0; i<listPizza.size();i++)
-						System.out.println(listPizza.get(i).toString());
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
 			
 					System.out.println("Veuillez choisir le code de la pizza à modifier :");
 					String codeModif = choixUtilisateur.nextLine();
@@ -68,30 +57,19 @@ private static ArrayList<Pizza> listPizza;
 					String newPrixTemp = choixUtilisateur.nextLine();
 					double newPrix = Double.parseDouble(newPrixTemp);
 					
-					for(int i=0; i <listPizza.size();i++){
-						if(listPizza.get(i).getCode().equals(codeModif)){
-							listPizza.get(i).setCode(newCode);
-							listPizza.get(i).setLibelle(newNom);
-							listPizza.get(i).setPrix(newPrix);
-							break;
-						}
-					}
+					pizza.updatePizza(codeModif, new Pizza(newCode,newNom,newPrix));
+					
 				break;
 				
 				case 4: 
 					System.out.println("Suppresion d'une pizza");
 					System.out.println("Liste des pizzas");
-					for(int i=0; i<listPizza.size();i++)
-						System.out.println(listPizza.get(i).toString());
-					
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
 					System.out.println("Veuillez choisir le code de la pizza à supprimer :");
 					String codeSupprimer = choixUtilisateur.nextLine();
 					
-					for(int i=0; i <listPizza.size();i++){
-						if(listPizza.get(i).getCode().equals(codeSupprimer)){
-							listPizza.remove(i);
-						}
-					}
+					pizza.deletePizza(codeSupprimer);
 				break;
 				
 				case 99: System.out.println("Aurevoir ☹");
