@@ -63,7 +63,8 @@ public class Pizza {
 		compteur--;
 	}
 	
-	@Override public String toString(){
+	@Override 
+	public String toString(){
 		String pizza = this.code + " -> " + this.libelle + " (" + this.prix + " \u20ac)";
 		return pizza;
 	}
