@@ -4,9 +4,11 @@ import java.util.Scanner;
 import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
-
+	
+	private static Pizza tableauPizza[]; 
+	
 	public static void main(String[] args) {
-		Pizza tableauPizza[] = new Pizza[8]; 
+		tableauPizza = new Pizza[8];
 		tableauPizza[0]= new Pizza(0,"PEP","Pépéroni",12.50);
 		tableauPizza[1]= new Pizza(1,"MAR","Margherita",14.00);
 		tableauPizza[2]= new Pizza(2,"REIN","La reine",11.50);
@@ -18,9 +20,10 @@ public class PizzeriaAdminConsoleApp {
 		
 		
 		
-		Scanner choixMenu = new Scanner(System.in); 
+		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(afficherMenu());
-		int choix = choixMenu.nextInt();
+		String choixTemp = choixUtilisateur.nextLine();
+		int choix = Integer.parseInt(choixTemp);
 		
 		do{
 			switch(choix){
@@ -33,10 +36,27 @@ public class PizzeriaAdminConsoleApp {
 				
 				break;
 				
-				case 2: System.out.println("Ajout d'une nouvelle pizza");
+				case 2: 
+					System.out.println("Ajout d'une nouvelle pizza");
+					System.out.println("Veuillez saisir le code :");
+					String code = choixUtilisateur.nextLine();
+					
+					System.out.println("Veuillez saisir le nom (sans espace) :");
+					String nom = choixUtilisateur.nextLine();
+					
+					System.out.println("Veuillez saisir le prix :");
+					String prixTemp = choixUtilisateur.nextLine();
+					double prix = Double.parseDouble(prixTemp);
+					
+					Pizza pizzaTemp= new Pizza(code,nom,prix);
+					nouveauTab(tableauPizza, pizzaTemp);
 				break;
 				
-				case 3: System.out.println("Mise à jour d'une pizza");
+				case 3: 
+					System.out.println("Mise à jour d'une pizza");
+				
+				
+				
 				break;
 				
 				case 4: System.out.println("Suppresion d'une pizza");
@@ -48,7 +68,8 @@ public class PizzeriaAdminConsoleApp {
 			
 			if(choix!=99){
 				System.out.println(afficherMenu());
-				choix = choixMenu.nextInt();	
+				choixTemp = choixUtilisateur.nextLine();
+				choix = Integer.parseInt(choixTemp);	
 			}
 						
 		
@@ -56,6 +77,13 @@ public class PizzeriaAdminConsoleApp {
 		
 	}
 
+	private static void nouveauTab(Pizza[] tab, Pizza pizza){
+		tableauPizza= new Pizza[tab.length+1];
+		for(int i=0;i<tab.length;i++){
+			tableauPizza[i]=tab[i];
+		}
+		tableauPizza[tableauPizza.length-1]= pizza;
+	}
 	
 	
 	public static String afficherMenu(){
