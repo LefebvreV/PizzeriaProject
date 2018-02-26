@@ -1,8 +1,6 @@
 package fr.pizzeria.controle;
 
-import fr.pizzeria.model.Pizza;
 import java.util.Scanner;
-import fr.pizzeria.console.IPizzaDao;
 import fr.pizzeria.console.PizzaMemDao;
 
 
@@ -17,7 +15,19 @@ public class PizzaControleur {
 		String choixTemp = choixUtilisateur.nextLine();
 		int choix = Integer.parseInt(choixTemp);
 		
-		ListerPizzaService lPS = new ListerPizzaService();
+		do{
+			MenuService mSF = MenuServiceFactory.execute(choix);
+			mSF.executeUC(pizzaDao);
+			
+			if(choix!=99){
+				System.out.println(menu());
+				choixTemp = choixUtilisateur.nextLine();
+				choix = Integer.parseInt(choixTemp);	
+			}
+			
+		}while(choix!=99);
+		
+		/*ListerPizzaService lPS = new ListerPizzaService();
 		AjouterPizzaService aPS = new AjouterPizzaService();
 		ModifierPizzaService mPS = new ModifierPizzaService();
 		SupprimerPizzaService sPS = new SupprimerPizzaService();
@@ -26,22 +36,18 @@ public class PizzaControleur {
 			switch(choix){
 				case 1: 
 					lPS.executeUC(pizzaDao);
-					//System.out.println(menu());
 				break;
 				
 				case 2: 
 					aPS.executeUC(pizzaDao);
-					//System.out.println(menu());
 				break;
 				
 				case 3: 
 					mPS.executeUC(pizzaDao);
-					//System.out.println(menu());
 				break;
 				
 				case 4: 
 					sPS.executeUC(pizzaDao);
-					//System.out.println(menu());
 				break;
 				
 				case 99: System.out.println("Aurevoir ☹");
@@ -55,7 +61,7 @@ public class PizzaControleur {
 			}
 						
 		}while(choix!=99);
-		
+		*/
 		choixUtilisateur.close();
 	}
 
