@@ -1,27 +1,32 @@
 package fr.pizzeria.controle;
 
 import java.util.Scanner;
-import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.console.*;
+import fr.pizzeria.exception.PizzaException;
 
 
 public class PizzaControleur {
 
+	
 	public static void main(String[] args) {
 		
 		IPizzaDao pizzaDao = new PizzaMemDao();
-		try {
-			Scanner choixUtilisateur = new Scanner(System.in); 
-			System.out.println(menu());
-			String choixTemp = choixUtilisateur.nextLine();
-			int choix = Integer.parseInt(choixTemp);
-			
+		
+		Scanner choixUtilisateur = new Scanner(System.in); 
+		System.out.println(menu());
+		String choixTemp = choixUtilisateur.nextLine();
+		int choix = Integer.parseInt(choixTemp);
+		
+		if(choix!=99)
 			do{
+			
 				
-				
+				try {
 					MenuService mSF = MenuServiceFactory.execute(choix);
 					mSF.executeUC(pizzaDao);
-				
+				} catch (PizzaException e) {
+					System.err.println(e.getMessage());
+				}
 				
 				if(choix!=99){
 					System.out.println(menu());
@@ -30,10 +35,7 @@ public class PizzaControleur {
 				}
 				
 			}while(choix!=99);
-				choixUtilisateur.close();
-			} catch (PizzaException e) {
-				System.err.println(e.getMessage());
-		}
+		choixUtilisateur.close();
 		
 		/*ListerPizzaService lPS = new ListerPizzaService();
 		AjouterPizzaService aPS = new AjouterPizzaService();
@@ -69,8 +71,9 @@ public class PizzaControleur {
 			}
 						
 		}while(choix!=99);
+		choixUtilisateur.close();
+		*/
 		
-		choixUtilisateur.close();*/
 	}
 
 	
