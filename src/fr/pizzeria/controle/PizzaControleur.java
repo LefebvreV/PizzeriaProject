@@ -1,31 +1,39 @@
 package fr.pizzeria.controle;
 
 import java.util.Scanner;
-import fr.pizzeria.console.PizzaMemDao;
+import fr.pizzeria.exception.PizzaException;
+import fr.pizzeria.console.*;
 
 
 public class PizzaControleur {
 
 	public static void main(String[] args) {
 		
-		PizzaMemDao pizzaDao = new PizzaMemDao();
-		
-		Scanner choixUtilisateur = new Scanner(System.in); 
-		System.out.println(menu());
-		String choixTemp = choixUtilisateur.nextLine();
-		int choix = Integer.parseInt(choixTemp);
-		
-		do{
-			MenuService mSF = MenuServiceFactory.execute(choix);
-			mSF.executeUC(pizzaDao);
+		IPizzaDao pizzaDao = new PizzaMemDao();
+		try {
+			Scanner choixUtilisateur = new Scanner(System.in); 
+			System.out.println(menu());
+			String choixTemp = choixUtilisateur.nextLine();
+			int choix = Integer.parseInt(choixTemp);
 			
-			if(choix!=99){
-				System.out.println(menu());
-				choixTemp = choixUtilisateur.nextLine();
-				choix = Integer.parseInt(choixTemp);	
-			}
-			
-		}while(choix!=99);
+			do{
+				
+				
+					MenuService mSF = MenuServiceFactory.execute(choix);
+					mSF.executeUC(pizzaDao);
+				
+				
+				if(choix!=99){
+					System.out.println(menu());
+					choixTemp = choixUtilisateur.nextLine();
+					choix = Integer.parseInt(choixTemp);	
+				}
+				
+			}while(choix!=99);
+				choixUtilisateur.close();
+			} catch (PizzaException e) {
+				System.err.println(e.getMessage());
+		}
 		
 		/*ListerPizzaService lPS = new ListerPizzaService();
 		AjouterPizzaService aPS = new AjouterPizzaService();
@@ -61,8 +69,8 @@ public class PizzaControleur {
 			}
 						
 		}while(choix!=99);
-		*/
-		choixUtilisateur.close();
+		
+		choixUtilisateur.close();*/
 	}
 
 	

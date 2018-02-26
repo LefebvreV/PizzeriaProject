@@ -2,7 +2,8 @@ package fr.pizzeria.controle;
 
 import java.util.Scanner;
 
-import fr.pizzeria.console.PizzaMemDao;
+import fr.pizzeria.console.*;
+import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaService extends MenuService {
@@ -10,7 +11,7 @@ public class SupprimerPizzaService extends MenuService {
 	Scanner choixUtilisateur = new Scanner(System.in); 
 	
 	@Override
-	void executeUC(PizzaMemDao pizzaDao) {
+	void executeUC(IPizzaDao pizzaDao) throws DeletePizzaException{
 		System.out.println("Suppresion d'une pizza");
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())

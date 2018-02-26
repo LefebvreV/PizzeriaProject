@@ -1,10 +1,12 @@
 package fr.pizzeria.controle;
 
+import fr.pizzeria.exception.PizzaException;
+
 public class MenuServiceFactory {
 	
 	static MenuService mS;
 	
-	public static MenuService execute(int choix){
+	public static MenuService execute(int choix) throws PizzaException{
 		switch(choix){
 			case 1: 
 				mS = new ListerPizzaService();
@@ -24,6 +26,9 @@ public class MenuServiceFactory {
 			
 			case 99: System.out.println("Aurevoir ☹");
 			break;
+			
+			default: 
+				throw new PizzaException("Coucou, ça a foiré");
 		}
 		
 		return mS;
