@@ -17,7 +17,7 @@ public class PizzaMemDao implements IPizzaDao{
 		listPizza.add(new Pizza(4,"CAN","La cannibale",12.50));
 		listPizza.add(new Pizza(5,"SAV","La savoyarde",13.00));
 		listPizza.add( new Pizza(6,"ORI","L'orientale",13.50));
-		listPizza.add( new Pizza(7,"IND","L'indienne",14.00));
+		listPizza.add( new Pizza(7,"IND","L'indienne",14.00)); 
 	}
 
 	@Override
