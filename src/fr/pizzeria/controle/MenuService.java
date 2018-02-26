@@ -3,6 +3,11 @@ package fr.pizzeria.controle;
 import fr.pizzeria.console.*;
 import fr.pizzeria.exception.PizzaException;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public abstract class MenuService {
 	
 	/**

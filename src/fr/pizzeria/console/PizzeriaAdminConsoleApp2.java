@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class PizzeriaAdminConsoleApp2 {
 	
 	public static void main(String[] args) {

@@ -18,7 +18,11 @@ public class SupprimerPizzaService extends MenuService {
 			System.out.println(pizzaTemp.toString());
 		System.out.println("Veuillez choisir le code de la pizza à supprimer :");
 		String codeSupprimer = choixUtilisateur.nextLine();
-		
+		if(codeSupprimer.isEmpty()){
+			throw new DeletePizzaException("Le code est vide");
+		}else if(!pizzaDao.pizzaExists(codeSupprimer)){
+			throw new DeletePizzaException("La pizza n'existe pas");
+		}
 		pizzaDao.deletePizza(codeSupprimer);
 		
 	}

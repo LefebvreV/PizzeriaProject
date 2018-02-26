@@ -2,10 +2,21 @@ package fr.pizzeria.controle;
 
 import fr.pizzeria.exception.PizzaException;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class MenuServiceFactory {
 	
 	static MenuService mS;
 	
+	/**
+	 *  Méthode oriantant l'utilisateur selon son choix de menu
+	 * @param choix
+	 * @return MenuService
+	 * @throws PizzaException
+	 */
 	public static MenuService execute(int choix) throws PizzaException{
 		switch(choix){
 			case 1: 
@@ -24,11 +35,8 @@ public class MenuServiceFactory {
 				mS = new SupprimerPizzaService();
 			break;
 			
-			case 99: System.out.println("Aurevoir ☹");
-			break;
-			
 			default: 
-				throw new PizzaException("Coucou, ça a foiré");
+				throw new PizzaException("Erreur, mauvais choix de menu");
 		}
 		
 		return mS;

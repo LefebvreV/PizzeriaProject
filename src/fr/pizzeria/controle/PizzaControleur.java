@@ -35,6 +35,7 @@ public class PizzaControleur {
 				}
 				
 			}while(choix!=99);
+		System.out.println("Aurevoir ☹");
 		choixUtilisateur.close();
 		
 		/*ListerPizzaService lPS = new ListerPizzaService();

@@ -3,6 +3,11 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class PizzeriaAdminConsoleApp {
 	
 	private static Pizza tableauPizza[]; 
@@ -130,7 +135,7 @@ public class PizzeriaAdminConsoleApp {
 	
 	/**
 	 * 
-	 * Méthode servant à fair un tableau plus petit après une suppression
+	 * Méthode servant à faire un tableau plus petit après une suppression
 	 * @param tab
 	 */
 	private static void refaireTableau(Pizza[] tab){

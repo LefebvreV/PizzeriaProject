@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class PizzaMemDao implements IPizzaDao{
 
 	private List<Pizza> listPizza;
 	
+	/**
+	 * Constructeur PizzaMemDao avec une liste de pizza initiale
+	 */
 	public PizzaMemDao(){
 		listPizza = new ArrayList<>();
 		listPizza.add(new Pizza(0,"PEP","Pépéroni",12.50));

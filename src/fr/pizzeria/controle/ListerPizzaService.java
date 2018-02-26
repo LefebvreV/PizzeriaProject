@@ -3,6 +3,11 @@ package fr.pizzeria.controle;
 import fr.pizzeria.console.*;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class ListerPizzaService extends MenuService {
 
 	@Override
