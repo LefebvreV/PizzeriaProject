@@ -1,4 +1,4 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.service;
 
 import java.util.Scanner;
 
@@ -11,12 +11,12 @@ public class SupprimerPizzaService extends MenuService {
 	Scanner choixUtilisateur = new Scanner(System.in); 
 	
 	@Override
-	void executeUC(IPizzaDao pizzaDao) throws DeletePizzaException{
+	public void executeUC(IPizzaDao pizzaDao) throws DeletePizzaException{
 		System.out.println("Suppresion d'une pizza");
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())
 			System.out.println(pizzaTemp.toString());
-		System.out.println("Veuillez choisir le code de la pizza à supprimer :");
+		System.out.println("Veuillez choisir le code de la pizza ï¿½ supprimer :");
 		String codeSupprimer = choixUtilisateur.nextLine();
 		if(codeSupprimer.isEmpty()){
 			throw new DeletePizzaException("Le code est vide");

@@ -1,8 +1,10 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.console;
 
 import java.util.Scanner;
 import fr.pizzeria.console.*;
 import fr.pizzeria.exception.PizzaException;
+import fr.pizzeria.service.MenuService;
+import fr.pizzeria.service.MenuServiceFactory;
 
 
 public class PizzaControleur {

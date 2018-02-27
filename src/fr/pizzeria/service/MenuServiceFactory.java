@@ -1,4 +1,4 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.service;
 
 import fr.pizzeria.exception.PizzaException;
 

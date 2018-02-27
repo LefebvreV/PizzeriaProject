@@ -1,4 +1,4 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.service;
 
 import java.util.Scanner;
 import fr.pizzeria.console.*;
@@ -16,7 +16,7 @@ public class AjouterPizzaService extends MenuService {
 	Scanner choixUtilisateur = new Scanner(System.in); 
 
 	@Override
-	void executeUC(IPizzaDao pizzaDao) throws SavePizzaException {
+	public void executeUC(IPizzaDao pizzaDao) throws SavePizzaException {
 		System.out.println("Ajout d'une nouvelle pizza");
 		System.out.println("Veuillez saisir le code :");
 		String code = choixUtilisateur.nextLine();

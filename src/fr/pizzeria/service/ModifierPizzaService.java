@@ -1,4 +1,4 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.service;
 
 import java.util.Scanner;
 import fr.pizzeria.console.*;
@@ -16,7 +16,7 @@ public class ModifierPizzaService extends MenuService {
 	Scanner choixUtilisateur = new Scanner(System.in); 
 	
 	@Override
-	void executeUC(IPizzaDao pizzaDao) throws UpdatePizzaException{
+	public void executeUC(IPizzaDao pizzaDao) throws UpdatePizzaException{
 		System.out.println("Mise à jour d'une pizza");
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())

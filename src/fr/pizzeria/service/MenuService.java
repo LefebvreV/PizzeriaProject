@@ -1,4 +1,4 @@
-package fr.pizzeria.controle;
+package fr.pizzeria.service;
 
 import fr.pizzeria.console.*;
 import fr.pizzeria.exception.PizzaException;
@@ -11,9 +11,9 @@ import fr.pizzeria.exception.PizzaException;
 public abstract class MenuService {
 	
 	/**
-	 * Methode absract qui va devoir gerer les différents services.
+	 * Methode absract qui va devoir gerer les diffï¿½rents services.
 	 * @param pizzaDao
 	 * @throws PizzaException
 	 */
-	abstract void executeUC(IPizzaDao pizzaDao) throws PizzaException;
+	public abstract void executeUC(IPizzaDao pizzaDao) throws PizzaException;
 }
