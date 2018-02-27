@@ -1,6 +1,8 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -10,18 +12,9 @@ import fr.pizzeria.model.Pizza;
  */
 public class PizzeriaAdminConsoleApp {
 	
-	private static Pizza tableauPizza[]; 
-	
 	public static void main(String[] args) {
-		tableauPizza = new Pizza[8];
-		tableauPizza[0]= new Pizza(0,"PEP","Pépéroni",12.50);
-		tableauPizza[1]= new Pizza(1,"MAR","Margherita",14.00);
-		tableauPizza[2]= new Pizza(2,"REIN","La reine",11.50);
-		tableauPizza[3]= new Pizza(3,"FRO","La 4 formages",12.00);
-		tableauPizza[4]= new Pizza(4,"CAN","La cannibale",12.50);
-		tableauPizza[5]= new Pizza(5,"SAV","La savoyarde",13.00);
-		tableauPizza[6]= new Pizza(6,"ORI","L'orientale",13.50);
-		tableauPizza[7]= new Pizza(7,"IND","L'indienne",14.00);
+		
+		IPizzaDao pizza = new PizzaMemDao();
 		
 		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(afficherMenu());
@@ -32,10 +25,8 @@ public class PizzeriaAdminConsoleApp {
 			switch(choix){
 				case 1: 
 					System.out.println("Liste des pizzas");
-					for(int i=0; i <tableauPizza.length;i++){
-						System.out.println(tableauPizza[i].toString());
-					}
-				
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
 				break;
 				
 				case 2: 
@@ -46,25 +37,32 @@ public class PizzeriaAdminConsoleApp {
 					System.out.println("Veuillez saisir le nom (sans espace) :");
 					String nom = choixUtilisateur.nextLine();
 					
+					System.out.println("Veuillez saisir le type parmi :" + CategoriePizza.values());
+					String type = choixUtilisateur.nextLine().toUpperCase();
+					CategoriePizza categorie = CategoriePizza.valueOf(type);
+					
 					System.out.println("Veuillez saisir le prix :");
 					String prixTemp = choixUtilisateur.nextLine();
 					double prix = Double.parseDouble(prixTemp);
 					
-					Pizza pizzaTemp= new Pizza(code,nom,prix);
-					nouveauTab(tableauPizza, pizzaTemp);
+					pizza.saveNewPizza(new Pizza(code,nom,categorie,prix));
 				break;
 				
 				case 3: 
 					System.out.println("Mise à jour d'une pizza");
 					System.out.println("Liste des pizzas");
-					for(int i=0; i <tableauPizza.length;i++){
-						System.out.println(tableauPizza[i].toString());
-					}
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
+			
 					System.out.println("Veuillez choisir le code de la pizza à modifier :");
 					String codeModif = choixUtilisateur.nextLine();
 					
 					System.out.println("Veuillez saisir le nouveau code :");
 					String newCode = choixUtilisateur.nextLine();
+					
+					System.out.println("Veuillez saisir le nouveau type parmi :" + CategoriePizza.values());
+					String newType = choixUtilisateur.nextLine().toUpperCase();
+					CategoriePizza newCategorie = CategoriePizza.valueOf(newType);
 					
 					System.out.println("Veuillez saisir le nouveau nom (sans espace) :");
 					String newNom = choixUtilisateur.nextLine();
@@ -73,35 +71,19 @@ public class PizzeriaAdminConsoleApp {
 					String newPrixTemp = choixUtilisateur.nextLine();
 					double newPrix = Double.parseDouble(newPrixTemp);
 					
-					for(int i=0; i <tableauPizza.length;i++){
-						if(tableauPizza[i].getCode().equals(codeModif)){
-							tableauPizza[i].setCode(newCode);
-							tableauPizza[i].setLibelle(newNom);
-							tableauPizza[i].setPrix(newPrix);
-							break;
-						}
-					}
+					pizza.updatePizza(codeModif, new Pizza(newCode,newNom,newCategorie, newPrix));
+					
 				break;
 				
 				case 4: 
 					System.out.println("Suppresion d'une pizza");
 					System.out.println("Liste des pizzas");
-					for(int i=0; i <tableauPizza.length;i++){
-						System.out.println(tableauPizza[i].toString());
-					}
+					for(Pizza pizzaTemp:pizza.findAllPizzas())
+						System.out.println(pizzaTemp.toString());
 					System.out.println("Veuillez choisir le code de la pizza à supprimer :");
 					String codeSupprimer = choixUtilisateur.nextLine();
 					
-					for(int i=0; i <tableauPizza.length;i++){
-						if(tableauPizza[i].getCode().equals(codeSupprimer)){
-							for(int j=i;j<tableauPizza.length-1;j++){
-								tableauPizza[j]=tableauPizza[j+1];
-								tableauPizza[j].setId(tableauPizza[j].getId()-1);
-							}
-							Pizza.modifCompteur();
-							refaireTableau(tableauPizza);
-						}
-					}
+					pizza.deletePizza(codeSupprimer);
 				break;
 				
 				case 99: System.out.println("Aurevoir ☹");
@@ -118,33 +100,6 @@ public class PizzeriaAdminConsoleApp {
 		
 		choixUtilisateur.close();
 	}
-
-	/**
-	 * Méthode servant à créer un tableau plus grand 
-	 * avant l'inserttion d'une nouvelle pizza
-	 * @param tab
-	 * @param pizza
-	 */
-	private static void nouveauTab(Pizza[] tab, Pizza pizza){
-		tableauPizza= new Pizza[tab.length+1];
-		for(int i=0;i<tab.length;i++){
-			tableauPizza[i]=tab[i];
-		}
-		tableauPizza[tableauPizza.length-1]= pizza;
-	}
-	
-	/**
-	 * 
-	 * Méthode servant à faire un tableau plus petit après une suppression
-	 * @param tab
-	 */
-	private static void refaireTableau(Pizza[] tab){
-		tableauPizza = new Pizza[tab.length-1];
-		for(int i=0;i<tab.length-1;i++){
-			tableauPizza[i]=tab[i];
-		}
-		
-	}
 	
 	/**
 	 * Méthode pour afficher le menu
@@ -160,5 +115,5 @@ public class PizzeriaAdminConsoleApp {
 		menu += "99. Sortir\n";
 		return menu;
 	}
-	
+
 }

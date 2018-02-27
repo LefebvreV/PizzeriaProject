@@ -3,6 +3,7 @@ package fr.pizzeria.controle;
 import java.util.Scanner;
 import fr.pizzeria.console.*;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -16,12 +17,12 @@ public class ModifierPizzaService extends MenuService {
 	
 	@Override
 	void executeUC(IPizzaDao pizzaDao) throws UpdatePizzaException{
-		System.out.println("Mise ‡ jour d'une pizza");
+		System.out.println("Mise √† jour d'une pizza");
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())
 			System.out.println(pizzaTemp.toString());
 
-		System.out.println("Veuillez choisir le code de la pizza ‡ modifier :");
+		System.out.println("Veuillez choisir le code de la pizza √† modifier :");
 		String codeModif = choixUtilisateur.nextLine();
 		if(codeModif.isEmpty()){
 			throw new UpdatePizzaException("Le code est vide");
@@ -41,6 +42,26 @@ public class ModifierPizzaService extends MenuService {
 			throw new UpdatePizzaException("Le nom est vide");
 		}
 		
+		String s="";
+		for(CategoriePizza c : CategoriePizza.values()){
+			s += c.getType() + " ";
+		}
+		System.out.println("Veuillez saisir le type parmi :" + s);
+		String newType = choixUtilisateur.nextLine().toUpperCase();
+		if(newType.isEmpty()){
+			throw new UpdatePizzaException("Le type est vide");
+		}
+		boolean categorieExist = false;
+		for(CategoriePizza typePizza : CategoriePizza.values()){
+			if(newType.equals(typePizza.toString())){
+				categorieExist = true;
+			}
+		}
+		if(!categorieExist)
+			throw new UpdatePizzaException("La cat√©gorie de pizza n'existe pas");
+		
+		CategoriePizza newCategorie = CategoriePizza.valueOf(newType);
+		
 		System.out.println("Veuillez saisir le nouveau prix :");
 		String newPrixTemp = choixUtilisateur.nextLine();
 		if(newPrixTemp.isEmpty()){
@@ -48,7 +69,7 @@ public class ModifierPizzaService extends MenuService {
 		}
 		double newPrix = Double.parseDouble(newPrixTemp);
 		
-		pizzaDao.updatePizza(codeModif, new Pizza(newCode,newNom,newPrix));
+		pizzaDao.updatePizza(codeModif, new Pizza(newCode,newNom,newCategorie,newPrix));
 		
 	}
 
