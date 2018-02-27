@@ -17,6 +17,8 @@ public class AjouterPizzaService extends MenuService {
 
 	@Override
 	public void executeUC(IPizzaDao pizzaDao) throws SavePizzaException {
+		
+		//Acquisition et test du code
 		System.out.println("Ajout d'une nouvelle pizza");
 		System.out.println("Veuillez saisir le code :");
 		String code = choixUtilisateur.nextLine();
@@ -24,12 +26,14 @@ public class AjouterPizzaService extends MenuService {
 			throw new SavePizzaException("Le code est vide");
 		}
 		
+		//Acquisition et test du nom
 		System.out.println("Veuillez saisir le nom (sans espace) :");
 		String nom = choixUtilisateur.nextLine();
 		if(nom.isEmpty()){
 			throw new SavePizzaException("Le nom est vide");
 		}
 		
+		//Acquisition et test de la categorie de pizza
 		String s="";
 		for(CategoriePizza c : CategoriePizza.values()){
 			s += c.getType() + " ";
@@ -49,6 +53,7 @@ public class AjouterPizzaService extends MenuService {
 			throw new SavePizzaException("La catégorie de pizza n'existe pas");
 		CategoriePizza categorie = CategoriePizza.valueOf(type);
 		
+		//Acquisition et test du prix
 		System.out.println("Veuillez saisir le prix :");
 		String prixTemp = choixUtilisateur.nextLine();
 		if(prixTemp.isEmpty()){

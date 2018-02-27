@@ -6,6 +6,11 @@ import fr.pizzeria.console.*;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class SupprimerPizzaService extends MenuService {
 
 	Scanner choixUtilisateur = new Scanner(System.in); 

@@ -1,7 +1,7 @@
 package fr.pizzeria.exception;
 
 /**
- * 
+ * Exception générale
  * @author Valentin Lefebvre
  *
  */

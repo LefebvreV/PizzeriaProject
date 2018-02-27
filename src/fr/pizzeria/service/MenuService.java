@@ -11,7 +11,7 @@ import fr.pizzeria.exception.PizzaException;
 public abstract class MenuService {
 	
 	/**
-	 * Methode absract qui va devoir gerer les diff�rents services.
+	 * Methode absract qui va devoir gerer les différents services.
 	 * @param pizzaDao
 	 * @throws PizzaException
 	 */

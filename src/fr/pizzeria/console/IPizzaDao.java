@@ -11,39 +11,39 @@ import fr.pizzeria.model.Pizza;
  */
 public interface IPizzaDao {
 	/**
-	 * Méthode renvoyant la liste des pizzas
+	 * MÃ©thode renvoyant la liste des pizzas
 	 * @return List<Pizza>
 	 */
 	List<Pizza>findAllPizzas();
 	
 	/**
-	 * Méthode pour ajouter une nouvelle pizza
+	 * MÃ©thode pour ajouter une nouvelle pizza
 	 * @param pizza
 	 */
 	void saveNewPizza(Pizza pizza);
 	
 	/**
-	 * Méthode pour modifier une pizza existante
+	 * MÃ©thode pour modifier une pizza existante
 	 * @param codePizza
 	 * @param pizza
 	 */
 	void updatePizza(String codePizza, Pizza pizza);
 	
 	/**
-	 * Méthode pour supprimer une pizza existante
+	 * MÃ©thode pour supprimer une pizza existante
 	 * @param codePizza
 	 */
 	void deletePizza(String codePizza);
 	
 	/**
-	 * Méthode pour trouver une pizza de la liste selon son code
+	 * MÃ©thode pour trouver une pizza de la liste selon son code
 	 * @param codePizza
 	 * @return la pizza dont le code correspond si elle existe sinon null
 	 */
 	Pizza findPizzaByCode(String codePizza);
 	
 	/**
-	 * Méthode pour savoir si une pizza existe ou non selon le code passé en paramètre
+	 * MÃ©thode pour savoir si une pizza existe ou non selon le code passï¿½ en paramï¿½tre
 	 * @param codePizza 
 	 * @return true si la pizza existe, false dans le cas contraire
 	 */

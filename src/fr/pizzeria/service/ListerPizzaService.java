@@ -4,7 +4,7 @@ import fr.pizzeria.console.*;
 import fr.pizzeria.model.Pizza;
 
 /**
- * 
+ * Service pour afficher la liste des pizzas
  * @author Valentin Lefebvre
  *
  */

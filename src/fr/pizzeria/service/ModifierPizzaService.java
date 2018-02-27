@@ -7,7 +7,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
- * 
+ * Service pour modifier une pizza existante
  * @author Valentin Lefebvre
  *
  */
@@ -17,11 +17,13 @@ public class ModifierPizzaService extends MenuService {
 	
 	@Override
 	public void executeUC(IPizzaDao pizzaDao) throws UpdatePizzaException{
+		//Affichage de la liste existante
 		System.out.println("Mise à jour d'une pizza");
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())
 			System.out.println(pizzaTemp.toString());
-
+		
+		//Acquisition et test du code de la pizza à modifier
 		System.out.println("Veuillez choisir le code de la pizza à modifier :");
 		String codeModif = choixUtilisateur.nextLine();
 		if(codeModif.isEmpty()){
@@ -30,18 +32,21 @@ public class ModifierPizzaService extends MenuService {
 			throw new UpdatePizzaException("La pizza n'existe pas");
 		}
 		
+		//Acquisition et test du nouveau code
 		System.out.println("Veuillez saisir le nouveau code :");
 		String newCode = choixUtilisateur.nextLine();
 		if(newCode.isEmpty()){
 			throw new UpdatePizzaException("Le code est vide");
 		}
 		
+		//Acquisition et test du nouveau nom
 		System.out.println("Veuillez saisir le nouveau nom (sans espace) :");
 		String newNom = choixUtilisateur.nextLine();
 		if(newNom.isEmpty()){
 			throw new UpdatePizzaException("Le nom est vide");
 		}
 		
+		//Acquisition et test de la nouvelle catégorie
 		String s="";
 		for(CategoriePizza c : CategoriePizza.values()){
 			s += c.getType() + " ";
@@ -62,6 +67,7 @@ public class ModifierPizzaService extends MenuService {
 		
 		CategoriePizza newCategorie = CategoriePizza.valueOf(newType);
 		
+		//Acquisition et test du nouveau prix
 		System.out.println("Veuillez saisir le nouveau prix :");
 		String newPrixTemp = choixUtilisateur.nextLine();
 		if(newPrixTemp.isEmpty()){

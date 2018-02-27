@@ -1,18 +1,24 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
-import fr.pizzeria.console.*;
 import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
 
-
+/**
+ * Controleur du projet pizzeria
+ * @author Valentin Lefebvre
+ *
+ */
 public class PizzaControleur {
 
-	
+	/**
+	 *  Controleur actuel
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
-		IPizzaDao pizzaDao = new PizzaMemDao();
+		IPizzaDao pizzaDao = new PizzaTxtDao();
 		
 		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(menu());
@@ -21,8 +27,6 @@ public class PizzaControleur {
 		
 		if(choix!=99)
 			do{
-			
-				
 				try {
 					MenuService mSF = MenuServiceFactory.execute(choix);
 					mSF.executeUC(pizzaDao);
@@ -40,7 +44,9 @@ public class PizzaControleur {
 		System.out.println("Aurevoir ☹");
 		choixUtilisateur.close();
 		
-		/*ListerPizzaService lPS = new ListerPizzaService();
+		/*
+		// Ancienne façon de faire 
+		ListerPizzaService lPS = new ListerPizzaService();
 		AjouterPizzaService aPS = new AjouterPizzaService();
 		ModifierPizzaService mPS = new ModifierPizzaService();
 		SupprimerPizzaService sPS = new SupprimerPizzaService();
@@ -91,6 +97,7 @@ public class PizzaControleur {
 		menu += "2. Ajouter une nouvelle pizza\n";
 		menu += "3. Mettre à jour une pizza\n";
 		menu += "4. Supprimer une pizza\n";
+		menu += "5. Générer un pdf de la liste des pizzas\n";
 		menu += "99. Sortir\n";
 		return menu;
 	}

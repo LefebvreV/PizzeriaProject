@@ -1,20 +1,34 @@
 package fr.pizzeria.model;
 
+import fr.pizzeria.utils.StringUtils;
+import fr.pizzeria.utils.ToString;
+
+/**
+ * 
+ * @author Valentin Lefebvre
+ *
+ */
 public class Pizza {
 	
-	/** id : int */
 	public int id;
-	/** code : String */
+	@ToString(upperCase=true, separateur=" : ")
 	public String code;
-	/** libelle : String */
+	@ToString (separateur=" => ")
 	public String libelle;
-	/** prix : double */
-	public double prix;
-	/** type : CategoriePizza */
+	@ToString(upperCase=true, separateur=" (")
 	public CategoriePizza type;
-	/** compteur : int */
+	@ToString (separateur=" €) ")
+	public double prix;
+	/** int pour savoir le nombre de pizza*/
 	private static int compteur=0;
 
+	/**
+	 * Constructeur sans id
+	 * @param code
+	 * @param libelle
+	 * @param type
+	 * @param prix
+	 */
 	public Pizza(String code, String libelle, CategoriePizza type, double prix) {
 		this.id = compteur++;
 		this.code = code;
@@ -23,6 +37,14 @@ public class Pizza {
 		this.prix = prix;
 	}
 
+	/**
+	 * Constructeur avec id
+	 * @param id
+	 * @param code
+	 * @param libelle
+	 * @param type
+	 * @param prix
+	 */
 	public Pizza(int id, String code, String libelle, CategoriePizza type, double prix) {
 		this.id = id;
 		this.code = code;
@@ -31,8 +53,6 @@ public class Pizza {
 		this.prix = prix;
 		compteur++;
 	}
-
-
 
 	/**
 	 * Getter 
@@ -131,8 +151,8 @@ public class Pizza {
 	
 	@Override 
 	public String toString(){
-		String pizza = this.code + " -> " + this.libelle + " - " + this.type.getType()  + " (" + this.prix + " \u20ac)";
-		return pizza;
+		return StringUtils.afficherPizza(this);
+		
 	}
 
 }

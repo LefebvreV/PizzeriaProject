@@ -12,6 +12,10 @@ import fr.pizzeria.model.Pizza;
  */
 public class PizzeriaAdminConsoleApp {
 	
+	/**
+	 * Ancien Controleur
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		IPizzaDao pizza = new PizzaMemDao();
@@ -23,12 +27,14 @@ public class PizzeriaAdminConsoleApp {
 		
 		do{
 			switch(choix){
+				//Afficher la liste de pizza
 				case 1: 
 					System.out.println("Liste des pizzas");
 					for(Pizza pizzaTemp:pizza.findAllPizzas())
 						System.out.println(pizzaTemp.toString());
 				break;
 				
+				//Ajouter une pizza
 				case 2: 
 					System.out.println("Ajout d'une nouvelle pizza");
 					System.out.println("Veuillez saisir le code :");
@@ -48,6 +54,7 @@ public class PizzeriaAdminConsoleApp {
 					pizza.saveNewPizza(new Pizza(code,nom,categorie,prix));
 				break;
 				
+				//Modifier une pizza
 				case 3: 
 					System.out.println("Mise à jour d'une pizza");
 					System.out.println("Liste des pizzas");
@@ -75,6 +82,7 @@ public class PizzeriaAdminConsoleApp {
 					
 				break;
 				
+				//Supprimer une pizza
 				case 4: 
 					System.out.println("Suppresion d'une pizza");
 					System.out.println("Liste des pizzas");
@@ -86,6 +94,7 @@ public class PizzeriaAdminConsoleApp {
 					pizza.deletePizza(codeSupprimer);
 				break;
 				
+				//Quitter le menu
 				case 99: System.out.println("Aurevoir ☹");
 				break;
 			}
