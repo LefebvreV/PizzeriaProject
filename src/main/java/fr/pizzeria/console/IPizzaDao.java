@@ -43,7 +43,7 @@ public interface IPizzaDao {
 	Pizza findPizzaByCode(String codePizza);
 	
 	/**
-	 * Méthode pour savoir si une pizza existe ou non selon le code pass� en param�tre
+	 * Méthode pour savoir si une pizza existe ou non selon le code passé en paramètre
 	 * @param codePizza 
 	 * @return true si la pizza existe, false dans le cas contraire
 	 */
