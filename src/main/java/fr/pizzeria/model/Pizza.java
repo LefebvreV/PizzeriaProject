@@ -11,13 +11,13 @@ import fr.pizzeria.utils.ToString;
 public class Pizza {
 	
 	public int id;
-	@ToString(upperCase=true, separateur=" : ")
+	@ToString(upperCase=true, separateur=" : ", notNull=true)
 	public String code;
-	@ToString (separateur=" => ")
+	@ToString (separateur=" => ", notNull=true)
 	public String libelle;
-	@ToString(upperCase=true, separateur=" (")
+	@ToString(upperCase=true, separateur=" (", notNull=true)
 	public CategoriePizza type;
-	@ToString (separateur=" €) ")
+	@ToString (separateur=" €) ", notNull=true)
 	public double prix;
 	/** int pour savoir le nombre de pizza*/
 	private static int compteur=0;

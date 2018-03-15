@@ -9,7 +9,6 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import fr.pizzeria.console.IPizzaDao;
 import fr.pizzeria.console.PizzaMemDao;
-import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.service.AjouterPizzaService;
@@ -44,10 +43,18 @@ public class AjouterPizzaServiceTest {
 	}
 	
 	@Test (expected = SavePizzaException.class)
-	public void testExecuteUCException() throws SavePizzaException{
+	public void testExecuteUCExceptionVide() throws SavePizzaException{
 		IPizzaDao dao = new PizzaMemDao(); 
 		AjouterPizzaService menu = new AjouterPizzaService();
 		systemInMock.provideLines("PEP","Pépéroni", "","12.50");
+		menu.executeUC(dao);
+	}
+	
+	@Test (expected = SavePizzaException.class)
+	public void testExecuteUCExceptionAutreValeur() throws SavePizzaException{
+		IPizzaDao dao = new PizzaMemDao(); 
+		AjouterPizzaService menu = new AjouterPizzaService();
+		systemInMock.provideLines("36","46", "VIANDE","coucou");
 		menu.executeUC(dao);
 	}
 

@@ -18,7 +18,7 @@ public class PizzaControleur {
 	 */
 	public static void main(String[] args) {
 		
-		IPizzaDao pizzaDao = new PizzaTxtDao();
+		IPizzaDao pizzaDao = new PizzaDaoJdbc();
 		
 		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(menu());
@@ -44,45 +44,6 @@ public class PizzaControleur {
 		System.out.println("Aurevoir ☹");
 		choixUtilisateur.close();
 		
-		/*
-		// Ancienne façon de faire 
-		ListerPizzaService lPS = new ListerPizzaService();
-		AjouterPizzaService aPS = new AjouterPizzaService();
-		ModifierPizzaService mPS = new ModifierPizzaService();
-		SupprimerPizzaService sPS = new SupprimerPizzaService();
-		
-		do{
-			switch(choix){
-				case 1: 
-					lPS.executeUC(pizzaDao);
-				break;
-				
-				case 2: 
-					aPS.executeUC(pizzaDao);
-				break;
-				
-				case 3: 
-					mPS.executeUC(pizzaDao);
-				break;
-				
-				case 4: 
-					sPS.executeUC(pizzaDao);
-				break;
-				
-				case 99: System.out.println("Aurevoir ☹");
-				break;
-			}
-			
-			if(choix!=99){
-				System.out.println(menu());
-				choixTemp = choixUtilisateur.nextLine();
-				choix = Integer.parseInt(choixTemp);	
-			}
-						
-		}while(choix!=99);
-		choixUtilisateur.close();
-		*/
-		
 	}
 
 	
@@ -98,6 +59,7 @@ public class PizzaControleur {
 		menu += "3. Mettre à jour une pizza\n";
 		menu += "4. Supprimer une pizza\n";
 		menu += "5. Générer un pdf de la liste des pizzas\n";
+		menu += "6. Enregistrer les pizzas dans la BDD\n";
 		menu += "99. Sortir\n";
 		return menu;
 	}

@@ -20,9 +20,14 @@ public class ModifierPizzaService extends MenuService {
 		//Affichage de la liste existante
 		System.out.println("Mise à jour d'une pizza");
 		System.out.println("Liste des pizzas");
-		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())
+		if(pizzaDao.findAllPizzas() == null)
+			throw new UpdatePizzaException("La liste renvoyé par findAllPizzas est null");
+		for(Pizza pizzaTemp:pizzaDao.findAllPizzas()){
+			if (pizzaTemp == null)
+				throw new UpdatePizzaException("Une des pizza retourné est null");
 			System.out.println(pizzaTemp.toString());
-		
+		}
+			
 		//Acquisition et test du code de la pizza à modifier
 		System.out.println("Veuillez choisir le code de la pizza à modifier :");
 		String codeModif = choixUtilisateur.nextLine();

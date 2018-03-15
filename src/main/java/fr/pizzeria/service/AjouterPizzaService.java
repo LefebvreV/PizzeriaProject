@@ -1,6 +1,9 @@
 package fr.pizzeria.service;
 
 import java.util.Scanner;
+
+import org.apache.commons.lang.math.NumberUtils;
+
 import fr.pizzeria.console.*;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
@@ -59,6 +62,8 @@ public class AjouterPizzaService extends MenuService {
 		if(prixTemp.isEmpty()){
 			throw new SavePizzaException("Le prix est vide");
 		}
+		if(!NumberUtils.isNumber(prixTemp))
+			throw new SavePizzaException("Le prix n'est pas un chiffre(double)");
 		double prix = Double.parseDouble(prixTemp);
 		
 		pizzaDao.saveNewPizza(new Pizza(code,nom,categorie,prix));

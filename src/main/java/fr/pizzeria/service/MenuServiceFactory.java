@@ -44,6 +44,11 @@ public class MenuServiceFactory {
 				mS = new GenererPDFService();
 			break;
 			
+			//Générer un pdf avec la liste des pizzas
+			case 6: 
+				mS = new EnregistrerBDD();
+			break;
+			
 			default: 
 				throw new PizzaException("Erreur, mauvais choix de menu");
 		}

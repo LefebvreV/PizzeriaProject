@@ -13,4 +13,6 @@ public @interface ToString {
 	boolean upperCase() default false;
 	/** Annotation pour définir la séparation*/
 	String separateur() default "";
+	/** Annotation pour mettre en upperCase ou non */
+	boolean notNull() default true;
 }

@@ -20,12 +20,20 @@ public class StringUtils {
 				if(f.isAnnotationPresent(ToString.class)){
 					ToString annotation = f.getAnnotation(ToString.class);
 					Object value = f.get(obj);
-					//Cas d'annotation upperCase
-					if(annotation.upperCase())
-						value = value.toString().toUpperCase();
-					//Cas d'annotation séparateur
-					if(!annotation.separateur().equals(""))
-						value += annotation.separateur();
+					if(annotation.notNull()){
+						if(value == null)
+							value = "La valeur " + f.getName() + " est null" + annotation.separateur();
+						else{
+							//Cas d'annotation upperCase
+							if(annotation.upperCase())
+								value = value.toString().toUpperCase();
+							//Cas d'annotation séparateur
+							if(!annotation.separateur().equals(""))
+								value += annotation.separateur();
+							
+						}
+					}
+					
 					pizza += value;
 				}
 			}
