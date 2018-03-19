@@ -17,6 +17,7 @@ public class PizzaMemDao implements IPizzaDao{
 	
 	/**
 	 * Constructeur PizzaMemDao avec une liste de pizza initiale
+	 * Ne pas oublié l'id
 	 */
 	public PizzaMemDao(){
 		listPizza = new ArrayList<>();

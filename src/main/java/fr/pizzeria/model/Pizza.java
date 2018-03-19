@@ -1,5 +1,14 @@
 package fr.pizzeria.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import fr.pizzeria.utils.StringUtils;
 import fr.pizzeria.utils.ToString;
 
@@ -8,20 +17,34 @@ import fr.pizzeria.utils.ToString;
  * @author Valentin Lefebvre
  *
  */
+@Entity
+@Table(name="PIZZA")
 public class Pizza {
 	
+	@Id
+	@Column(name = "PIZ_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	public int id;
 	@ToString(upperCase=true, separateur=" : ", notNull=true)
+	@Column(name="PIZ_CODE", length=5, nullable = false)
 	public String code;
 	@ToString (separateur=" => ", notNull=true)
+	@Column(name="PIZ_LIBELLE", length=16, nullable = false)
 	public String libelle;
 	@ToString(upperCase=true, separateur=" (", notNull=true)
+	@Column(name="PIZ_TYPE", length=20, nullable = false)
+	@Enumerated(EnumType.STRING)
 	public CategoriePizza type;
 	@ToString (separateur=" €) ", notNull=true)
+	@Column(name="PIZ_PRIX", length=5, nullable = false)
 	public double prix;
 	/** int pour savoir le nombre de pizza*/
 	private static int compteur=0;
 
+	public Pizza(){
+		
+	}
+	
 	/**
 	 * Constructeur sans id
 	 * @param code
@@ -30,7 +53,6 @@ public class Pizza {
 	 * @param prix
 	 */
 	public Pizza(String code, String libelle, CategoriePizza type, double prix) {
-		this.id = compteur++;
 		this.code = code;
 		this.libelle = libelle;
 		this.type = type;

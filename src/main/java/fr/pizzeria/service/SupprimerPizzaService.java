@@ -21,7 +21,7 @@ public class SupprimerPizzaService extends MenuService {
 		System.out.println("Liste des pizzas");
 		for(Pizza pizzaTemp:pizzaDao.findAllPizzas())
 			System.out.println(pizzaTemp.toString());
-		System.out.println("Veuillez choisir le code de la pizza ра supprimer :");
+		System.out.println("Veuillez choisir le code de la pizza ├а supprimer :");
 		String codeSupprimer = choixUtilisateur.nextLine();
 		if(codeSupprimer.isEmpty()){
 			throw new DeletePizzaException("Le code est vide");

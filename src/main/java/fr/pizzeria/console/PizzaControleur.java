@@ -18,7 +18,7 @@ public class PizzaControleur {
 	 */
 	public static void main(String[] args) {
 		
-		IPizzaDao pizzaDao = new PizzaDaoJdbc();
+		IPizzaDao pizzaDao = new PizzaDaoJpa();
 		
 		Scanner choixUtilisateur = new Scanner(System.in); 
 		System.out.println(menu());
